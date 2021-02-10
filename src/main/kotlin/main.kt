@@ -45,7 +45,13 @@ object Exercises {
 			val squareOfTriple: (Double) -> Long = higherAndThen<Double, Int, Long>()(triple)(square)
 			return squareOfTriple(2.0) == 12L
 		}
-
+	}
+	val ex_3_7 = object : Testable() {
+		fun <A, B, C> partially(a: A, f: (A) -> (B) -> C): (B) -> C = f(a)
+		override fun test(): Boolean {
+			val f: (Long) -> String = partially<Int, Long, String>(2) { a: Int -> { l: Long -> (l + a).toString() } }
+			return f(3L) == "5"
+		}
 	}
 }
 
