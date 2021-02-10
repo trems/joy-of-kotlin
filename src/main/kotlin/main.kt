@@ -53,6 +53,13 @@ object Exercises {
 			return f(3L) == "5"
 		}
 	}
+	val ex_3_8 = object : Testable() {
+		fun <A, B, C> partial(b: B, f: (A) -> (B) -> C): (A) -> C = { a: A -> f(a)(b) }
+		override fun test(): Boolean {
+			val f = partial<Int, Long, String>(10L, { i: Int -> { l: Long -> (l * i).toString() } })
+			return f(2) == "20"
+		}
+	}
 }
 
 
