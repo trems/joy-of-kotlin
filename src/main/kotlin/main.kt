@@ -75,7 +75,12 @@ object Exercises {
 		fun <A, B, C> swapArgs(f: (A) -> (B) -> C): (B) -> (A) -> C = { b -> { a -> f(a)(b) }}
 		override fun test(): Boolean = addTax(1)(2) == 12 && swapArgs(addTax)(2)(1) == 12
 	}
-
+	val ex_4_1 = object : Testable() {
+		fun inc(n: Int) = n + 1
+		fun dec(n: Int) = n - 1
+		tailrec fun add(a: Int, b: Int): Int = if (b == 0) a else add(inc(a), dec(b))
+		override fun test(): Boolean = add(3, 7) == 10
+	}
 }
 
 
