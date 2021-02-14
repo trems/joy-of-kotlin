@@ -79,4 +79,34 @@ class Chapter_4 : StringSpec({
         fun string(chars: List<Char>): String = foldRight(chars, "") { s, ch -> "$ch$s" }
         string(listOf('K','o','t','l','i','n')) shouldBe "Kotlin"
     }
+    "ex 4.7" {
+        fun <T> reverse(list: List<T>): List<T> = list.fold(listOf<T>())  { acc, el -> listOf(el) + acc }
+        reverse(listOf(1,2,3,4,5)) shouldBe listOf(5,4,3,2,1)
+    }
+    "!:ex 4.8 skipped" {}
+    "ex 4.9" {
+        fun range(start: Int, end: Int): List<Int> {
+            val res = mutableListOf<Int>()
+            var idx = start
+            while (idx < end) {
+                res.add(idx)
+                idx++
+            }
+            return res
+        }
+        range(0, 4) shouldBe listOf(0,1,2,3)
+    }
+    "ex 4.10" {
+        fun <T> unfold(seed: T, f: (T) -> T, p: (T) -> Boolean): List<T> {
+            val res = mutableListOf<T>()
+            var elem = seed
+            while (p(elem)) {
+                res.add(elem)
+                elem = f(elem)
+            }
+            return res
+        }
+
+        unfold(1, {it + 1}, {it < 6}) shouldBe listOf(1,2,3,4,5)
+    }
 })
